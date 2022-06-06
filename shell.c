@@ -1,23 +1,24 @@
 #include "shell.h"
 #include <stdio.h>
+#include <unistd.h>
 
 /**
  * main - the entry of the shell program
- * @argc - argument count
- * @argv - argument vector
+ * @argc: argument count
+ * @argv: argument vector
  * Return: 0 on success or 1
  */
 
-int main(int argc, char **argv)
+int main()
 {
-    char *command;
-    size_t n_get;
-    shell_init();
+	char *input;
+	char **commands;
 
-    while (n_get = getline(&command, &n_get, STDIN) != -1)
-    {
-
-    }
-    return (0);
-
+	/**
+	 * shell_init();
+	 */
+	input = get_input();
+	commands = parse_input(input);
+	execvp(commands[0], commands);
+	return (0);
 }
