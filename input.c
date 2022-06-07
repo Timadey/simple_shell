@@ -10,11 +10,18 @@ char *get_input(void)
 	ssize_t get_byte = 0;
 
 	get_byte = getline(&lineptr, &n_byte, stdin);
-	if (get_byte < 0)
+	if (get_byte == -1)
 	{
-		perror("tsh: couldn't read input");
-		free(lineptr);
-		exit(EXIT_FAILURE);
+		if (feof(stdin))
+		{
+			exit(EXIT_SUCCESS);
+		}
+		else
+		{
+			perror("tsh: couldn't read input");
+			free(lineptr);
+			exit(EXIT_FAILURE);
+		}
 	}
 	return (lineptr);
 }
@@ -27,7 +34,7 @@ char **parse_input(char *input)
 {
 	char **tokens;
 	char *token;
-	char *delim = " ";
+	char *delim = TOKEN_DELIM;
 	unsigned int token_size = TOKEN_SIZE;
 	unsigned int n = 0;
 

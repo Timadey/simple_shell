@@ -1,0 +1,5 @@
+make output the same as regular sh, same for error
+check if empty command was entered
+check for null pointers
+print shell prompt
+complete builtins

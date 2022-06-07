@@ -13,12 +13,19 @@ int main()
 {
 	char *input;
 	char **commands;
+	int (*builtin)(char **com);
 
 	/**
 	 * shell_init();
 	 */
 	input = get_input();
 	commands = parse_input(input);
-	execvp(commands[0], commands);
+	builtin = check_builtin(commands);
+	if (builtin)
+		(*builtin)(commands);
+	else
+		execute(commands);
+	free(input);
+	free(commands);
 	return (0);
 }
