@@ -9,6 +9,8 @@ int execute(char **commands, char *err)
 	pid_t pid;
 	int status;
 
+	if (!commands || !err)
+		return (-1);
 	pid = fork();
 	if (pid == 0)
 	{
@@ -20,7 +22,7 @@ int execute(char **commands, char *err)
 	}
 	else if (pid < 0)
 	{
-		perror("Execution error");
+		perror(err);
 	}
 	else
 	{

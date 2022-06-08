@@ -20,6 +20,7 @@ char *get_input(char *msg)
 	{
 		if (feof(stdin))
 		{
+			printf("\n");
 			exit(EXIT_SUCCESS);
 		}
 		else
@@ -44,6 +45,8 @@ char **parse_input(char *input, char *err )
 	unsigned int token_size = TOKEN_SIZE;
 	unsigned int n = 0;
 
+	if (!input || !err)
+		return (NULL);
 	tokens = malloc(sizeof(char *) * token_size);
 	if (!tokens)
 	{

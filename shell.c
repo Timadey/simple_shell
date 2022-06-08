@@ -20,7 +20,11 @@ int main(int ac, char **av)
 	while (ac)
 	{
 		input = get_input("#tite:");
+		if (input[0] == '\n' || input == NULL)
+			continue;
 		commands = parse_input(input, av[0]);
+		if (!commands)
+			perror("Error in parsing command");
 		builtin = check_builtin(commands);
 		if (builtin)
 			(*builtin)(commands, av[0]);

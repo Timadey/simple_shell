@@ -10,7 +10,9 @@ int (*check_builtin(char **commands))(char **commands, char *err)
 		{"cd", change_dir}
 	};
 	int i = 0;
-	
+
+	if (!commands)
+		return (NULL);
 	for (; i < 1; i++)
 	{
 		if (strcmp(commands[0], builtins->command) == 0)
