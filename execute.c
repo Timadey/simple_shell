@@ -4,7 +4,7 @@
  * @commands - the commands to execute
  * Return: int
  */
-int execute(char **commands)
+int execute(char **commands, char *err)
 {
 	pid_t pid;
 	int status;
@@ -14,7 +14,7 @@ int execute(char **commands)
 	{
 		if (execvp(commands[0], commands) == -1)
 		{
-			perror("Execution error");
+			perror(err);
 		}
 		exit(EXIT_FAILURE);
 	}

@@ -3,12 +3,18 @@
  * get_input - collect user raw input from the shell
  * Return: the string
  */
-char *get_input(void)
+char *get_input(char *msg)
 {
 	char *lineptr = NULL;
 	size_t n_byte = 0;
 	ssize_t get_byte = 0;
+	char dir[PATH_MAX];
 
+	if (getcwd(dir, sizeof(dir)) == NULL)
+	{
+		perror(msg);
+	}
+	printf("%s%s$ ", msg, dir);
 	get_byte = getline(&lineptr, &n_byte, stdin);
 	if (get_byte == -1)
 	{
@@ -18,7 +24,7 @@ char *get_input(void)
 		}
 		else
 		{
-			perror("tsh: couldn't read input");
+			perror(msg);
 			free(lineptr);
 			exit(EXIT_FAILURE);
 		}
@@ -30,7 +36,7 @@ char *get_input(void)
  * @input: the input to tokenize
  * Return: the tokenize inputs
  */
-char **parse_input(char *input)
+char **parse_input(char *input, char *err )
 {
 	char **tokens;
 	char *token;
@@ -41,7 +47,7 @@ char **parse_input(char *input)
 	tokens = malloc(sizeof(char *) * token_size);
 	if (!tokens)
 	{
-		perror("tsh: token allocation error");
+		perror(err);
 		free(tokens);
 		exit(EXIT_FAILURE);
 	}
@@ -55,7 +61,7 @@ char **parse_input(char *input)
 			tokens = realloc(tokens, token_size * sizeof(char *));
 			if (!tokens)
 			{
-				perror("tsh: token allocation error");
+				perror(err);
 				free(tokens);
 				exit(EXIT_FAILURE);
 			}

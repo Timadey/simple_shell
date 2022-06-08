@@ -4,7 +4,7 @@
  * @commands: the commands enterd
  * Return: 1
  */
-int (*check_builtin(char **commands))(char **commands)
+int (*check_builtin(char **commands))(char **commands, char *err)
 {
 	btin builtins[] = {
 		{"cd", change_dir}
@@ -25,15 +25,15 @@ int (*check_builtin(char **commands))(char **commands)
  * @dir - directory to change to
  * Return: 1
  */
-int change_dir(char **dir)
+int change_dir(char **dir, char *err)
 {
 	if (dir[1] == NULL)
 	{
-		perror("Expected argument to cd\n");
+		perror(err);
 	}
 	else if (chdir(dir[1]) != 0)
 	{
-		perror("Directory not found");
+		perror(err);
 	}
 	return (1);
 }

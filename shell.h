@@ -14,6 +14,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <linux/limits.h>
 /**
  * structs
  */
@@ -23,16 +24,16 @@
 typedef struct btin
 {
 	char *command;
-	int (*func)(char **arg);
+	int (*func)(char **arg, char *err);
 }btin;
 /**
  * declarations
  */
-char *get_input(void);
-char **parse_input(char *input);
-int execute(char **commands);
-int (*check_builtin(char **commands))(char **commands);
-int change_dir(char **dir);
+char *get_input(char *msg);
+char **parse_input(char *input, char *err);
+int execute(char **commands, char *err);
+int (*check_builtin(char **commands))(char **commands, char *err);
+int change_dir(char **dir, char *err);
 int builtin_num(btin builtins);
 
 #endif
