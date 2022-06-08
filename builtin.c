@@ -7,13 +7,14 @@
 int (*check_builtin(char **commands))(char **commands, char *err)
 {
 	btin builtins[] = {
-		{"cd", change_dir}
+		{"cd", change_dir},
+		{"exit", shell_exit}
 	};
 	int i = 0;
 
 	if (!commands)
 		return (NULL);
-	for (; i < 1; i++)
+	for (; i < 2; i++)
 	{
 		if (strcmp(commands[0], builtins->command) == 0)
 		{
@@ -38,4 +39,13 @@ int change_dir(char **dir, char *err)
 		perror(err);
 	}
 	return (1);
+}
+/**
+ * exit - exit the shell
+ * Return: void
+ */
+int shell_exit(char **com, char *err)
+{
+	printf("%s\n%s\n", *com, err);
+	return (-1);
 }

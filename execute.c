@@ -11,6 +11,14 @@ int execute(char **commands, char *err)
 
 	if (!commands || !err)
 		return (-1);
+	if (commands[0][0] == '/')
+	{
+		if (access(commands[0], F_OK) == -1)
+		{
+			perror(err);
+			return (1);
+		}
+	}
 	pid = fork();
 	if (pid == 0)
 	{
@@ -32,5 +40,5 @@ int execute(char **commands, char *err)
 		}
 		while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
-	return (1);
+	return (10);
 }
