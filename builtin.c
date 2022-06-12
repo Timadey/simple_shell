@@ -8,18 +8,31 @@ int (*check_builtin(char **commands))(char **commands, char *err)
 {
 	btin builtins[] = {
 		{"cd", change_dir},
-		{"exit", shell_exit}
+		{"exit", shell_exit},
+		{NULL, NULL}
 	};
 	int i = 0;
 
 	if (!commands)
 		return (NULL);
-	for (; i < 2; i++)
+	/**
+	for (builtins; builtins != NULL; builtins = builtins + 1)
 	{
-		if (strcmp(commands[0], builtins->command) == 0)
+		printf("\ncommand: %s\nbuiltin: %s\n", commands[0], builtins->command);
+		if (strcmp(builtins->command, commands[0]) == 0)
 		{
 			return (builtins->func);
 		}
+	};
+	*/
+
+	while (builtins[i].command != NULL)
+	{
+		if (strcmp(builtins[i].command, commands[0]) == 0)
+		{
+			return (builtins[i].func);
+		}
+		i++;
 	}
 	return (NULL);
 }
@@ -46,6 +59,7 @@ int change_dir(char **dir, char *err)
  */
 int shell_exit(char **com, char *err)
 {
-	printf("%s\n%s\n", *com, err);
+	(void)com;
+	(void)err;
 	return (-1);
 }

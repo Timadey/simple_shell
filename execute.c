@@ -40,5 +40,5 @@ int execute(char **commands, char *err)
 		}
 		while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
-	return (10);
+	return (1);
 }
