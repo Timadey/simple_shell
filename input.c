@@ -37,7 +37,7 @@ char *get_input(char *msg)
  * @input: the input to tokenize
  * Return: the tokenize inputs
  */
-char **parse_input(char *input, char *err )
+char **parse_input(char *input, char *err)
 {
 	char **tokens;
 	char *token;

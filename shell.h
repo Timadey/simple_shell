@@ -26,7 +26,7 @@ typedef struct btin
 {
 	char *command;
 	int (*func)(char **arg, char *err);
-}btin;
+} btin;
 /**
  * declarations
  */
