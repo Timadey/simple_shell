@@ -38,5 +38,5 @@ int execute(char **commands, char *err)
 			waitpid(pid, &status, WUNTRACED);
 		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
-	return (10);
+	return (1);
 }
