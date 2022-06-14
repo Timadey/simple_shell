@@ -1,7 +1,8 @@
 #include "shell.h"
 /**
  * execute - execute command
- * @commands - the commands to execute
+ * @err: error message
+ * @commands: the commands to execute
  * Return: int
  */
 int execute(char **commands, char *err)

@@ -3,3 +3,35 @@ check if empty command was entered
 check for null pointers
 print shell prompt
 complete builtins
+
+1. in welcome.txt
+a welcome message
+the authors and their emails
+builtin functions and their command
+
+exit - to exit the shell
+usage: exit or exit status
+
+cd - to change directory
+usage: cd to change to dir to $HOME
+cd - to change to prev dir
+cd dir - to change dir to dir
+
+env - to print environment variables
+usage: env
+
+setenv - to set environment variable
+usage: setenv NAME VALUE
+
+unsetenv
+usage: unsetenv NAME
+
+link to repo
+
+2. in AUTHOR file
+name and emails of authors using this format
+https://github.com/moby/moby/blob/master/AUTHORS
+
+3. fix betty
+warnings are basically missing description for function parameter
+@param: description

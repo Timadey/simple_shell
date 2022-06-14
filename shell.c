@@ -1,8 +1,8 @@
 #include "shell.h"
 /**
  * main - the entry of the shell program
- * @argc: argument count
- * @argv: argument vector
+ * @ac: argument count
+ * @av: argument vector
  * Return: 0 on success or 1
  */
 
@@ -10,7 +10,7 @@ int main(__UNUSED__ int ac, __UNUSED__ char **av)
 
 {
 	int (*builtin)(char **com, char *err) = NULL;
-	int status = 1; 
+	int status = 1;
 	/**
 	 * shell_init();
 	 */
@@ -18,7 +18,6 @@ int main(__UNUSED__ int ac, __UNUSED__ char **av)
 	while (status)
 	{
 		input = get_input("#tite:");
-		
 		if (input[0] == '\n')
 		{
 			free(input);
@@ -26,10 +25,8 @@ int main(__UNUSED__ int ac, __UNUSED__ char **av)
 		};
 		commands = parse_input(input, err);
 		if (!commands)
-		
 			perror("Error in parsing command");
 		builtin = check_builtin(commands);
-		
 		if (builtin != NULL)
 			status = (*builtin)(commands, av[0]);
 		else

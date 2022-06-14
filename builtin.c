@@ -10,6 +10,8 @@ int (*check_builtin(char **commands))(char **commands, char *err)
 		{"cd", change_dir},
 		{"exit", shell_exit},
 		{"env", pr_env},
+		{"setenv", _setenv},
+		{"unsetenv", _unsetenv},
 		{NULL, NULL}
 	};
 	int i = 0;
@@ -102,4 +104,30 @@ int pr_env(char **com, char *err)
 	}
 	return (1);
 }
+/**
+ * _setenv - set an environment variable
+ */
+int _setenv(char **com, char *err)
+{
+	if (com)
+	{
+		if (com[1] != NULL && com[2] != NULL)
+		{
+			if ((setenv(com[1], com[2], 1)) == -1)
+				perror(err);
+		}
+		else
+			perror(err);
+	};
+	return (1);
+}
+/**
+ * _unsetenv - unset an environment variable
+ */
+int _unsetenv(char **com, char *err)
+{
+	(void)com;
+	(void)err;
 
+	return (1);
+}
