@@ -9,21 +9,22 @@
 int main(__UNUSED__ int ac, __UNUSED__ char **av)
 
 {
-	char *input;
-	char **commands = NULL;
 	int (*builtin)(char **com, char *err) = NULL;
 	int status = 1; 
 	/**
 	 * shell_init();
 	 */
-	printf("%s\n", av[0]);
-	while (status != -1)
+	err = av[0];
+	while (status)
 	{
 		input = get_input("#tite:");
 		
-		if (input[0] == '\n' || input == NULL)
+		if (input[0] == '\n')
+		{
+			free(input);
 			continue;
-		commands = parse_input(input, av[0]);
+		};
+		commands = parse_input(input, err);
 		if (!commands)
 		
 			perror("Error in parsing command");
@@ -34,8 +35,9 @@ int main(__UNUSED__ int ac, __UNUSED__ char **av)
 		else
 			status = execute(commands, av[0]);
 		free(input);
+		printf("\n free input\n");
 		free(commands);
+		printf("\n free commands\n");
 	}
-	printf("\n");
 	return (0);
 }

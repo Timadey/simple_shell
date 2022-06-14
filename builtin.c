@@ -9,6 +9,7 @@ int (*check_builtin(char **commands))(char **commands, char *err)
 	btin builtins[] = {
 		{"cd", change_dir},
 		{"exit", shell_exit},
+		{"env", pr_env},
 		{NULL, NULL}
 	};
 	int i = 0;
@@ -45,6 +46,7 @@ int change_dir(char **dir, char *err)
 {
 	if (dir[1] == NULL)
 	{
+		printf("\n cd error\n");
 		perror(err);
 	}
 	else if (chdir(dir[1]) != 0)
@@ -59,7 +61,31 @@ int change_dir(char **dir, char *err)
  */
 int shell_exit(char **com, char *err)
 {
+	int status = 0;
+
+	(void)err;
+	if (com[1] != NULL)
+	{
+		status = atoi(com[1]);
+		exit(status);
+	}
+	exit(EXIT_SUCCESS);
+}
+/**
+ * pr_env - print environmental variable
+ * Return: 1
+ */
+int pr_env(char **com, char *err)
+{
+	extern char **environ;
 	(void)com;
 	(void)err;
-	return (-1);
+
+	while(*environ != NULL)
+	{
+		printf("%s\n", *environ);
+		environ++;
+	}
+	return (1);
 }
+

@@ -15,6 +15,7 @@ int execute(char **commands, char *err)
 	{
 		if (access(commands[0], F_OK) == -1)
 		{
+			printf("file no exist");
 			perror(err);
 			return (1);
 		}
@@ -25,8 +26,8 @@ int execute(char **commands, char *err)
 		if (execvp(commands[0], commands) == -1)
 		{
 			perror(err);
+			exit(EXIT_FAILURE);
 		}
-		exit(EXIT_FAILURE);
 	}
 	else if (pid < 0)
 	{

@@ -7,7 +7,7 @@ char *get_input(char *msg)
 {
 	char *lineptr = NULL;
 	size_t n_byte = 0;
-	ssize_t get_byte = 0;
+	int get_byte = 0;
 	char dir[PATH_MAX];
 
 	if (getcwd(dir, sizeof(dir)) == NULL)
@@ -15,12 +15,15 @@ char *get_input(char *msg)
 		perror(msg);
 	}
 	printf("%s%s$ ", msg, dir);
-	get_byte = getline(&lineptr, &n_byte, stdin);
-	if (get_byte == -1)
+	get_byte = _getline(&lineptr, &n_byte, stdin);
+	if (get_byte == EOF)
 	{
-		if (feof(stdin))
+		free(lineptr);
+		exit(EXIT_SUCCESS);
+		/*if (feof(stdin))
 		{
 			printf("\n");
+			free(lineptr);
 			exit(EXIT_SUCCESS);
 		}
 		else
@@ -28,7 +31,7 @@ char *get_input(char *msg)
 			perror(msg);
 			free(lineptr);
 			exit(EXIT_FAILURE);
-		}
+		}*/
 	}
 	return (lineptr);
 }
@@ -73,3 +76,63 @@ char **parse_input(char *input, char *err)
 	}
 	return (tokens);
 }
+/**
+ * check_malloc - check if malloc failed
+ */
+void check_malloc (char *mallocd)
+{
+	if (mallocd == NULL)
+	{
+		free(mallocd);
+		perror(err);
+		exit(EXIT_FAILURE);
+	}
+}
+/**
+ * getline
+ * assume that we're working with stdin for the moment which is opened already
+ * so we don't need to open and close
+ */
+
+int _getline(char **lineptr, size_t *n, FILE *stream)
+{
+	char *line;
+	size_t buf_size = BUF_SIZE;
+	size_t index = 0;
+	int c;
+
+	(void) stream;
+	line = malloc(buf_size * sizeof(char));
+	check_malloc(line);
+	while(1)
+	{
+		c = getchar();
+		if (c == '\n')
+		{
+			line[index] = c;
+			*n = index;
+			*lineptr = line;
+			return (index);
+		}
+		else if (c == EOF)
+		{
+			free(line);
+			exit(EXIT_SUCCESS);
+		}
+		else
+		{
+			line[index] = c;
+		}
+		index++;
+
+		if (index >= buf_size)
+		{
+			buf_size += BUF_SIZE;
+			line = realloc(*lineptr, buf_size * sizeof(char));
+			check_malloc(line);
+		}
+	}
+
+	return (1);
+}
+
