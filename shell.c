@@ -35,9 +35,7 @@ int main(__UNUSED__ int ac, __UNUSED__ char **av)
 		else
 			status = execute(commands, av[0]);
 		free(input);
-		printf("\n free input\n");
 		free(commands);
-		printf("\n free commands\n");
 	}
 	return (0);
 }

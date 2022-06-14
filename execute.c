@@ -15,7 +15,6 @@ int execute(char **commands, char *err)
 	{
 		if (access(commands[0], F_OK) == -1)
 		{
-			printf("file no exist");
 			perror(err);
 			return (1);
 		}
