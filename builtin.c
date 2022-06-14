@@ -44,15 +44,29 @@ int (*check_builtin(char **commands))(char **commands, char *err)
  */
 int change_dir(char **dir, char *err)
 {
+	char cur_dir[PATH_MAX];
+
+	if (getcwd(cur_dir, sizeof(cur_dir)) == NULL)
+	{
+		perror(err);
+	};
 	if (dir[1] == NULL)
 	{
-		printf("\n cd error\n");
-		perror(err);
+		dir[1] = getenv("HOME");
 	}
-	else if (chdir(dir[1]) != 0)
+	else if ((strncmp(dir[1], "-", 1)) == 0)
+	{
+		dir[1] = getenv("OLDPWD");
+	};
+	if (chdir(dir[1]) != 0)
 	{
 		perror(err);
 	}
+	if ((setenv("PWD", dir[1], 1)) == -1)
+		perror(err);
+	if ((setenv("OLDPWD", cur_dir, 1)) == -1)
+		perror(err);
+
 	return (1);
 }
 /**
