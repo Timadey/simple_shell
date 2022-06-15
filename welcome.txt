@@ -1,1 +1,29 @@
 Hey! Welcome to this shell
+Authors: Timothy Adeleke and Temitayo Akere
+Emails: dlktimothy@gmail.com and temiherself@gmail.com
+
+exit - to exit the shell
+usage: exit ot exit status
+
+cd - to change directory
+usage: cd to change to dir to $HOME
+cd - to change to prev dir
+cd dir - to change dir to dir
+
+env - to print environment varuables
+usage: env
+
+setenv - to set environment variables
+usage: setenv NAME VALUE
+
+link to repo
+
+2. in AUTHOR file
+
+Timothy Adeleke <dlktimothy@gmail.com>
+Temitayo Akere <temiherself@gmail.com>
+
+3. fix betty
+warnings are basically missing description for function parameter
+@param: description
+
