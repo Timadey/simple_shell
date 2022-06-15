@@ -21,6 +21,7 @@ char *get_input(char *msg)
 		if (feof(stdin))
 		{
 			printf("\n");
+			free(lineptr);
 			exit(EXIT_SUCCESS);
 		}
 		else

@@ -9,6 +9,7 @@ int (*check_builtin(char **commands))(char **commands, char *err)
 	btin builtins[] = {
 		{"cd", change_dir},
 		{"exit", shell_exit},
+		{"env", pr_env},
 		{NULL, NULL}
 	};
 	int i = 0;
@@ -62,4 +63,21 @@ int shell_exit(char **com, char *err)
 	(void)com;
 	(void)err;
 	return (-1);
+}
+/**
+ * pr_env - print environmental variable
+ * Return: 1
+ */
+int pr_env(char **com, char *err)
+{
+	extern char **environ;
+	(void)com;
+	(void)err;
+
+	while(*environ != NULL)
+	{
+		printf("%s\n", *environ);
+		environ++;
+	}
+	return (1);
 }

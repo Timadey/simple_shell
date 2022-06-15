@@ -37,5 +37,5 @@ int (*check_builtin(char **commands))(char **commands, char *err);
 int change_dir(char **dir, char *err);
 int builtin_num(btin builtins);
 int shell_exit(char **com, char *err);
-
+int pr_env(char **com, char *err);
 #endif
