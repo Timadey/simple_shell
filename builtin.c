@@ -9,25 +9,27 @@ int (*check_builtin(char **commands))(char **commands, char *err)
 	btin builtins[] = {
 		{"cd", change_dir},
 		{"exit", shell_exit},
-		{"env", pr_env},
+		{"env", pr_env}, << << << < HEAD
 		{"setenv", _setenv},
 		{"unsetenv", _unsetenv},
-		{NULL, NULL}
+	== == == =
+	>> >> >> > 6ba45e9c3245b060284d57ac943cbbe23a6099c2
+			{NULL, NULL}
 	};
 	int i = 0;
 
 	if (!commands)
 		return (NULL);
 	/**
-	for (builtins; builtins != NULL; builtins = builtins + 1)
-	{
-		printf("\ncommand: %s\nbuiltin: %s\n", commands[0], builtins->command);
-		if (strcmp(builtins->command, commands[0]) == 0)
-		{
-			return (builtins->func);
-		}
-	};
-	*/
+	  for (builtins; builtins != NULL; builtins = builtins + 1)
+	  {
+	  printf("\ncommand: %s\nbuiltin: %s\n", commands[0], builtins->command);
+	  if (strcmp(builtins->command, commands[0]) == 0)
+	  {
+	  return (builtins->func);
+	  }
+	  };
+	  */
 
 	while (builtins[i].command != NULL)
 	{
@@ -97,7 +99,7 @@ int pr_env(char **com, char *err)
 	(void)com;
 	(void)err;
 
-	while(*environ != NULL)
+	while (*environ != NULL)
 	{
 		printf("%s\n", *environ);
 		environ++;
@@ -129,5 +131,22 @@ int _unsetenv(char **com, char *err)
 	(void)com;
 	(void)err;
 
+	return (1);
+}
+/**
+ * pr_env - print environmental variable
+ * Return: 1
+ */
+int pr_env(char **com, char *err)
+{
+	extern char **environ;
+	(void)com;
+	(void)err;
+
+	while (*environ != NULL)
+	{
+		printf("%s\n", *environ);
+		environ++;
+	}
 	return (1);
 }

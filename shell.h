@@ -46,8 +46,11 @@ int change_dir(char **dir, char *err);
 int builtin_num(btin builtins);
 int shell_exit(char **com, char *err);
 int pr_env(char **com, char *err);
+<<<<<<< HEAD
 int _setenv(char **com, char *err);
 int _unsetenv(char **com, char *err);
 void __attribute__((constructor)) shell_init(); 
 void __attribute__((destructor)) shell_destroy();
+=======
+>>>>>>> 6ba45e9c3245b060284d57ac943cbbe23a6099c2
 #endif
