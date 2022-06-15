@@ -70,7 +70,6 @@ int shell_exit(char **com, char *err)
  */
 int pr_env(char **com, char *err)
 {
-	extern char **environ;
 	(void)com;
 	(void)err;
 
